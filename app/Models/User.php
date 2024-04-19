@@ -22,9 +22,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone',
-        'address',
-        'status'
+        'status',
+        'root',
+        'role_id',
     ];
 
     /**
@@ -46,30 +46,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function publications()
+    public function role()
     {
-        return $this->belongsToMany(Publication::class)
-            ->withPivot('seen_date');
-    }
-
-    public function activities()
-    {
-        return $this->belongsToMany(Activity::class)
-            ->withPivot('action');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function parents()
-    {
-        return $this->hasMany(Family::class, 'child_id');
-    }
-
-    public function childs()
-    {
-        return $this->hasMany(Family::class, 'parent_id');
+        return $this->belongsTo(Role::class);
     }
 }

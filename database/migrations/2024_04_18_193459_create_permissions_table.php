@@ -13,14 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('publications', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 250);
-            $table->text('desc');
-            $table->boolean('open');
-            $table->enum('type', ['activity', 'notice']);
+            $table->foreignId('role_id')->constrained();
+            $table->foreignId('action_modules_id')->constrained('permissions');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publications');
+        Schema::dropIfExists('permissions');
     }
 };

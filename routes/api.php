@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\PublicationController;
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +20,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::apiResource('user', UserController::class);
-Route::post('publication/seen/{publication}', [PublicationController::class, 'seen'])->name('publication-seen');
-Route::apiResource('publication', PublicationController::class);
+Route::post('role/permission/{role}', [RoleController::class, 'permission'])->name('permission');
+Route::apiResource('role', RoleController::class);

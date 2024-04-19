@@ -13,13 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('path', 250);
-            $table->enum('type', ['image', 'video', 'audio', 'file']);
-            $table->foreignId('publication_id')->constrained();
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->boolean('status')->default(true);
+            $table->boolean('root')->default(false);
+            $table->rememberToken();
+            $table->foreignId('role_id')->nullable()->constrained();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('users');
     }
 };

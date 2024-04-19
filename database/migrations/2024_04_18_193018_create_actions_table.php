@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('publication_user', function (Blueprint $table) {
+        Schema::create('actions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('publication_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->timestamp('seen_date')->nullable();
+            $table->string('name');
+            $table->string('slug');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publication_user');
+        Schema::dropIfExists('actions');
     }
 };

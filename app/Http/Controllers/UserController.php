@@ -31,8 +31,9 @@ class UserController extends Controller
             'name' => 'required|string|min:2|max:150',
             'email' => 'required|email|unique|max:150',
             'password' => 'required|string|min:8',
-            'phone' => 'required|string|max:15',
-            'address' => 'required|string|min:2|max:150',
+            'status' => 'required|boolean',
+            'root' => 'required|boolean',
+            'role_id' => 'required|numeric|integer|exists:roles,id'
         ]);
 
         $user = User::create($validated);
@@ -64,8 +65,8 @@ class UserController extends Controller
             'name' => 'string|min:2|max:150',
             'email' => 'email|max:150',
             'password' => 'string|min:8',
-            'phone' => 'string|max:15',
-            'address' => 'string|min:2|max:150',
+            'root' => 'boolean',
+            'role_id' => 'numeric|integer|exists:roles,id'
         ]);
 
         if ($user->isDirty())
